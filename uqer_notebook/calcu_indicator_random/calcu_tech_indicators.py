@@ -151,7 +151,7 @@ def calcu_transaction_profit(secID, stock_tech_item):
 def merge_transaction_profit(secID, stock_tech_item):
     merge_profit_result = []
     stock_tech_item["bull_or_bear"] = stock_tech_item["bull_or_bear"].apply(
-        lambda x: 2 * x - 1)
+        lambda x: 2 * x - 1)  # annotation essential !
     last_row = stock_tech_item.head(1)
     last_row.reset_index(inplace=True)
     last_flag = -last_row["bull_or_bear"][0]

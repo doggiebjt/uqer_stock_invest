@@ -7,8 +7,9 @@ import json
 import copy
 import datetime
 
-base_dir = "D:\workstation_spring_at_home\stock_research"
-stock_tech_csv_walk = list(os.walk("{}\data\csv\stock_tech_indicator".format(base_dir)))
+base_dir = r"D:\workstation\uqer_stock_invest\data\csv"
+stock_tech_csv_walk = list(os.walk("{}\stock_tech_indicator".format(base_dir)))
+# print(stock_tech_csv_walk)
 base_direction = stock_tech_csv_walk[0][0]
 file_names = stock_tech_csv_walk[0][-1]
 
@@ -28,14 +29,14 @@ stock_tech_csv.sort_values(by=["secID", "tradeDate"], ascending=True, inplace=Tr
 stock_tech_csv.rename(columns={'tradeDate': "s_tradeDate"}, inplace=True)
 stock_tech_secIDS = stock_tech_csv.secID.unique()
 # import pdb; pdb.set_trace()
-stock_tech_csv.to_csv('{}\data\csv\stock_tech_indicator_collect.csv'.format(base_dir), encoding='utf_8_sig')
+stock_tech_csv.to_csv('{}\stock_tech_indicator_collect.csv'.format(base_dir), encoding='utf_8_sig')
 
 stock_tech_items_dict = dict()
 for secID in stock_tech_secIDS:
     stock_tech_item = stock_tech_csv[stock_tech_csv["secID"] == secID]
     stock_tech_items_dict[secID] = copy.deepcopy(stock_tech_item)
 
-stock_newest_features = pd.read_csv("{}\data\csv\{}".format(base_dir, "stock_load_newest_indicator.csv"))
+stock_newest_features = pd.read_csv("{}\{}".format(base_dir, "stock_load_newest_indicator.csv"))
 stock_newest_features.drop_duplicates(subset=["secID", "s_listDate"], keep="first", inplace=True)
 
 print("Stock_tech_items load done.")
