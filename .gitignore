@@ -1,0 +1,13 @@
+*.csv
+temp_*.py
+
+.idea/*
+venv/*
+__pycache__/*
+
+data/*
+data/*.csv
+data/csv/*
+data/dict/*
+data/json/*
+data/simulation/*
